@@ -57,7 +57,7 @@ public class Directorio {
     
     public boolean guardarEditNuevo(File fileG, JFileChooser selecFileG, IDE compF){
         int x;
-        if(compF.getTitle().equals("[#EmptyStack]*"))
+        if(compF.getTitle().equals("[#HOC]*"))
             x = 0;
         else
             x = JOptionPane.showOptionDialog(compF, "El archivo actual está siendo editado, ¿desea guardar los cambios?",
@@ -69,7 +69,7 @@ public class Directorio {
                     compF.setTitle(fileG.getName());
                     
             }
-            else if(compF.getTitle().equals("[#EmptyStack]*")){
+            else if(compF.getTitle().equals("[#HOC]*")){
                 int y = JOptionPane.showOptionDialog(compF, "¿Desea guardar el archivo actual?",
                                                     "¿Descartar edición de archivo nuevo?", -1, 3, null, options, options[0]);
                 if(y==0){
@@ -122,7 +122,7 @@ public class Directorio {
     
     public boolean guardarEditAbrir(File fileG, JFileChooser selecFileG, IDE compF){
         int x;
-        if(compF.getTitle().equals("[#EmptyStack]*"))
+        if(compF.getTitle().equals("[#HOC]*"))
             x = 0;
         else
             x = JOptionPane.showOptionDialog(compF, "El archivo actual está siendo editado, ¿desea guardar los cambios?",
@@ -134,7 +134,7 @@ public class Directorio {
                     compF.setTitle(fileG.getName());
                     
             }
-            else if(compF.getTitle().equals("[#EmptyStack]*")){
+            else if(compF.getTitle().equals("[#HOC]*")){
                 int y = JOptionPane.showOptionDialog(compF, "¿Desea guardar el archivo actual?",
                                                     "¿Descartar edición de archivo nuevo?", -1, 3, null, options, options[0]);
                
@@ -173,7 +173,7 @@ public class Directorio {
                 }
                 else{
                      compF.jtpCode.setText("");
-                     compF.setTitle("[#EmptyStack]");
+                     compF.setTitle("[#HOC]");
                 }
             }
             else{
@@ -186,7 +186,7 @@ public class Directorio {
         }
         else{
             compF.jtpCode.setText("");
-            compF.setTitle("[#EmptyStack]");
+            compF.setTitle("[#HOC]");
         }
         return true;
     }
@@ -206,14 +206,14 @@ public class Directorio {
         
         if(compF.getTitle().contains("*")){
             if(guardarEditNuevo(file, selecFile, compF)){
-                compF.setTitle("[#EmptyStack]");
+                compF.setTitle("[#HOC]");
                 compF.jtpCode.setText("");
                 selecFile = new JFileChooser();
                 file = null;
             }
         }
         else{
-            compF.setTitle("[#EmptyStack]");
+            compF.setTitle("[#HOC]");
             compF.jtpCode.setText("");
             selecFile = new JFileChooser();
             file = null;

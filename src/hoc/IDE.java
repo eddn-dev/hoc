@@ -10,11 +10,14 @@ package hoc;
  */
 public class IDE extends javax.swing.JFrame {
 
+    NumeroLinea numerolinea;
+    Directorio dir;
     /**
      * Creates new form IDE
      */
     public IDE() {
         initComponents();
+        inicializar();
     }
 
     /**
@@ -26,25 +29,205 @@ public class IDE extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnNuevo = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnAbrir = new javax.swing.JButton();
+        btnReserved = new javax.swing.JButton();
+        btnIdentifiers = new javax.swing.JButton();
+        btnTokens = new javax.swing.JButton();
+        btnCompilar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtpCode = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtaCompile = new javax.swing.JTextArea();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1360, 690));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8_code_file_48px.png"))); // NOI18N
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setToolTipText("Nuevo documento");
+        btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8_code_file_48px_on.png"))); // NOI18N
+        btnNuevo.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8_code_file_48px_p.png"))); // NOI18N
+        btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 80, 80));
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8_save_48px.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guardar documento");
+        btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8_save_48px_on.png"))); // NOI18N
+        btnGuardar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8_save_48px_p.png"))); // NOI18N
+        btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 80, 80));
+
+        btnAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8_opened_folder_48px.png"))); // NOI18N
+        btnAbrir.setText("Abrir");
+        btnAbrir.setToolTipText("Abrir documento");
+        btnAbrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAbrir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8_opened_folder_48px_ON.png"))); // NOI18N
+        btnAbrir.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8_opened_folder_48px_P.png"))); // NOI18N
+        btnAbrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAbrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 80, 80));
+
+        btnReserved.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-text-color-48.png"))); // NOI18N
+        btnReserved.setText("Reservadas");
+        btnReserved.setToolTipText("Palabras reservadas");
+        btnReserved.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnReserved.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8-text-color-48.png"))); // NOI18N
+        btnReserved.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8-text-color-48.png"))); // NOI18N
+        btnReserved.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnReserved.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservedActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReserved, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 80));
+
+        btnIdentifiers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-text-cursor-48.png"))); // NOI18N
+        btnIdentifiers.setText("Identar");
+        btnIdentifiers.setToolTipText("Identar código");
+        btnIdentifiers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnIdentifiers.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8-text-cursor-48.png"))); // NOI18N
+        btnIdentifiers.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8-text-cursor-48.png"))); // NOI18N
+        btnIdentifiers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnIdentifiers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIdentifiersActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIdentifiers, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 80, 80));
+
+        btnTokens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-index-48.png"))); // NOI18N
+        btnTokens.setText("Tokens");
+        btnTokens.setToolTipText("Abrir documento");
+        btnTokens.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTokens.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8-index-48.png"))); // NOI18N
+        btnTokens.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8-index-48.png"))); // NOI18N
+        btnTokens.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTokens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTokensActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 80, 80));
+
+        btnCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8_code_48px.png"))); // NOI18N
+        btnCompilar.setText("Compilar");
+        btnCompilar.setToolTipText("Palabras reservadas");
+        btnCompilar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCompilar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8_code_48px_on.png"))); // NOI18N
+        btnCompilar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8_code_48px_p.png"))); // NOI18N
+        btnCompilar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCompilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompilarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCompilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 80, 80));
+
+        jtpCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtpCodeKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtpCode);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 1270, 400));
+
+        jtaCompile.setColumns(20);
+        jtaCompile.setRows(5);
+        jScrollPane2.setViewportView(jtaCompile);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 1270, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        jtaCompile.setText("");
+        dir.Nuevo(this);
+        clearAllComp();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+         dir.Guardar(this);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
+        // TODO add your handling code here:
+         dir.Abrir(this);
+    }//GEN-LAST:event_btnAbrirActionPerformed
+
+    private void btnReservedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReservedActionPerformed
+
+    private void btnIdentifiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdentifiersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIdentifiersActionPerformed
+
+    private void btnTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokensActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTokensActionPerformed
+
+    private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCompilarActionPerformed
+
+    private void jtpCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtpCodeKeyReleased
+        // TODO add your handling code here:
+         int keyCode = evt.getKeyCode();
+
+        if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 48 && keyCode <= 57) 
+            || (keyCode >= 97 && keyCode <= 122) || (keyCode != 27 && !(keyCode >= 37 
+            && keyCode <= 40) && !(keyCode >= 16 && keyCode <= 18) && keyCode != 524 
+            && keyCode != 20)) {
+
+            if (!getTitle().contains("*")) {
+                setTitle(getTitle() + "*");
+            }
+        }
+    }//GEN-LAST:event_jtpCodeKeyReleased
+
     /**
      * @param args the command line arguments
      */
+    
+    private void inicializar(){
+        
+        dir = new Directorio();
+        
+        //Importante
+        setTitle("#EmptyStack");
+        String[] options = new String[]{"Guardar y continuar", "Descartar"};
+        
+        //Numero de linea
+        numerolinea = new NumeroLinea(jtpCode);
+        jScrollPane1.setRowHeaderView(numerolinea);
+    }
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -76,7 +259,22 @@ public class IDE extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void clearAllComp(){
+        jtaCompile.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbrir;
+    private javax.swing.JButton btnCompilar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnIdentifiers;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnReserved;
+    private javax.swing.JButton btnTokens;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jtaCompile;
+    public javax.swing.JTextPane jtpCode;
     // End of variables declaration//GEN-END:variables
 }
