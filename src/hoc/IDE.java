@@ -40,6 +40,8 @@ public class IDE extends javax.swing.JFrame {
         jtpCode = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtaCompile = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1360, 690));
@@ -150,13 +152,19 @@ public class IDE extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtpCode);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 1270, 400));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 1000, 400));
 
         jtaCompile.setColumns(20);
         jtaCompile.setRows(5);
         jScrollPane2.setViewportView(jtaCompile);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 1270, 120));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 140, 250, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -274,6 +282,8 @@ public class IDE extends javax.swing.JFrame {
     private javax.swing.JButton btnTokens;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jtaCompile;
     public javax.swing.JTextPane jtpCode;
     // End of variables declaration//GEN-END:variables

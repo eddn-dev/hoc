@@ -4,6 +4,9 @@
  */
 package hoc;
 
+import javax.swing.JFrame;
+import hoc.IDE; // Asegúrate de importar tu clase IDE correctamente
+
 /**
  *
  * @author chori
@@ -14,7 +17,12 @@ public class HOC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Crear una instancia del formulario IDE
+        IDE ide = new IDE();
+        
+         // Configurar el formulario desde la clase principal
+        ide.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizar la ventana
+        ide.setVisible(true); // Mostrar la ventana
+        ide.setLocationRelativeTo(null); // Centrarla en pantalla (opcional)
     }
-    
 }
