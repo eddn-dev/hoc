@@ -21,6 +21,7 @@ public class IDE extends javax.swing.JFrame {
     public IDE() {
         initComponents();
         inicializar();
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); 
     }
 
     /**
