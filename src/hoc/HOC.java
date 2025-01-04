@@ -21,7 +21,6 @@ public class HOC {
         IDE ide = new IDE();
         
          // Configurar el formulario desde la clase principal
-        ide.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizar la ventana
         ide.setVisible(true); // Mostrar la ventana
         ide.setLocationRelativeTo(null); // Centrarla en pantalla (opcional)
     }

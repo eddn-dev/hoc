@@ -4,6 +4,9 @@
  */
 package hoc;
 
+import java.io.StringReader;
+import java_cup.runtime.Symbol;
+
 /**
  *
  * @author chori
@@ -32,8 +35,6 @@ public class IDE extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnAbrir = new javax.swing.JButton();
-        btnReserved = new javax.swing.JButton();
-        btnIdentifiers = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -89,34 +90,6 @@ public class IDE extends javax.swing.JFrame {
         });
         getContentPane().add(btnAbrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 80, 80));
 
-        btnReserved.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-text-color-48.png"))); // NOI18N
-        btnReserved.setText("Reservadas");
-        btnReserved.setToolTipText("Palabras reservadas");
-        btnReserved.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnReserved.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8-text-color-48.png"))); // NOI18N
-        btnReserved.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8-text-color-48.png"))); // NOI18N
-        btnReserved.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnReserved.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnReserved, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 80));
-
-        btnIdentifiers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-text-cursor-48.png"))); // NOI18N
-        btnIdentifiers.setText("Identar");
-        btnIdentifiers.setToolTipText("Identar código");
-        btnIdentifiers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIdentifiers.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8-text-cursor-48.png"))); // NOI18N
-        btnIdentifiers.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/pressed/icons8-text-cursor-48.png"))); // NOI18N
-        btnIdentifiers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnIdentifiers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIdentifiersActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnIdentifiers, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 80, 80));
-
         btnTokens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8-index-48.png"))); // NOI18N
         btnTokens.setText("Tokens");
         btnTokens.setToolTipText("Abrir documento");
@@ -129,10 +102,10 @@ public class IDE extends javax.swing.JFrame {
                 btnTokensActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 80, 80));
+        getContentPane().add(btnTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 80, 80));
 
         btnCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/Icon/icons8_code_48px.png"))); // NOI18N
-        btnCompilar.setText("Compilar");
+        btnCompilar.setText("Sintáctico");
         btnCompilar.setToolTipText("Palabras reservadas");
         btnCompilar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCompilar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/hoc/Iconos/On Layer/icons8_code_48px_on.png"))); // NOI18N
@@ -143,7 +116,7 @@ public class IDE extends javax.swing.JFrame {
                 btnCompilarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCompilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 80, 80));
+        getContentPane().add(btnCompilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 80, 80));
 
         jtpCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -186,20 +159,103 @@ public class IDE extends javax.swing.JFrame {
          dir.Abrir(this);
     }//GEN-LAST:event_btnAbrirActionPerformed
 
-    private void btnReservedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReservedActionPerformed
-
-    private void btnIdentifiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdentifiersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIdentifiersActionPerformed
-
     private void btnTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokensActionPerformed
-        // TODO add your handling code here:
+    
+    // 1) Limpiamos el área donde vamos a mostrar los tokens
+    jTextArea1.setText("");
+
+    try {
+        // 2) Obtenemos el texto fuente del editor
+        String input = jtpCode.getText().trim();
+
+        // 3) Creamos el analizador léxico con ese texto
+        //    (Asegúrate de importar la clase generada por JFlex)
+        AnalizadorLexico scanner = new AnalizadorLexico(new StringReader(input));
+
+        // 4) Leemos los tokens uno a uno
+        Symbol currentToken;
+        int tokenCount = 1;  // Contador para enumerar cada token leído
+
+        while (true) {
+            // next_token() analiza y devuelve un Symbol (o null si no hay más)
+            currentToken = scanner.next_token();
+
+            if (currentToken == null) {
+                // Si el analizador retorna null, no hay más tokens
+                break;
+            }
+
+            // El código del token es currentToken.sym
+            int tokenCode = currentToken.sym;
+
+            if (tokenCode == AnalizadorSintacticoSym.EOF) {
+                // Podemos mostrarlo si queremos
+                jTextArea1.append(
+                    "#" 
+                    + "TOKEN CODE: " + tokenCode
+                    + "\tNAME: EOF"
+                    + "\n"
+                );
+                // Rompemos el bucle si detectamos EOF
+                break;
+            }
+
+            // 5) Nombre textual del token (por ejemplo, "NUM", "VAR", "OpSuma", etc.)
+            String tokenName = AnalizadorSintacticoSym.terminalNames[tokenCode];
+
+            // 6) Obtenemos el lexema con scanner.yytext()
+            //    (sin usar currentToken.value)
+            String lexema = scanner.yytext();
+
+            // 7) Mostramos la información con el formato que desees
+            jTextArea1.append(
+                "#"
+                + "TOKEN CODE: " + tokenCode 
+                + "\tNAME: " + tokenName 
+                + "\tLEXEMA: " + lexema
+                + "\n"
+            );
+
+            tokenCount++;
+        }
+
+        // Mensaje opcional al final del análisis
+        jTextArea1.append(">> Análisis léxico finalizado.\n");
+
+    } catch (Exception ex) {
+        jTextArea1.append("Error: " + ex.getMessage() + "\n");
+        ex.printStackTrace();
+    }
     }//GEN-LAST:event_btnTokensActionPerformed
 
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
-        // TODO add your handling code here:
+        // Limpiamos el área de compilación si deseas
+        jtaCompile.setText("");
+        this.btnTokensActionPerformed(evt);
+
+        try {
+            // Texto a analizar
+            String input = jtpCode.getText().trim();
+
+            // Creamos el analizador léxico
+            AnalizadorLexico scanner = new AnalizadorLexico(new StringReader(input));
+
+            // Creamos el analizador sintáctico y le inyectamos el léxico
+            AnalizadorSintactico parser = new AnalizadorSintactico(scanner);
+
+            // Inyectamos la referencia de esta interfaz al parser
+            parser.setIDE(this);
+
+            // Ejecutamos el parse
+            parser.parse();
+
+            // Si llega acá sin excepción, se completó el parse
+            jtaCompile.append(">> Análisis sintáctico finalizado sin errores.\n");
+
+        } catch (Exception ex) {
+            jtaCompile.append("Error: " + ex.getMessage() + "\n");
+            ex.printStackTrace();
+        }  
     }//GEN-LAST:event_btnCompilarActionPerformed
 
     private void jtpCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtpCodeKeyReleased
@@ -276,15 +332,13 @@ public class IDE extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnCompilar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnIdentifiers;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnReserved;
     private javax.swing.JButton btnTokens;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jtaCompile;
+    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextArea jtaCompile;
     public javax.swing.JTextPane jtpCode;
     // End of variables declaration//GEN-END:variables
 }

@@ -77,7 +77,7 @@ public class Directorio {
                         fileG = selecFileG.getSelectedFile();
                         String fileGname = fileG.getName();
                 
-                        if(fileGname.endsWith(".emst")){
+                        if(fileGname.endsWith(".hoc3")){
                             if(!fileGname.split("[.]")[0].replace(" ","").equals("")){
                                 if(!fileG.exists())
                                     guardarArch(fileG, compF);  
@@ -97,7 +97,7 @@ public class Directorio {
                             }
                         }
                         else{
-                            JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.emst'",
+                            JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.hoc3'",
                                                           "Extensión inválida", 2); 
                             return false;
                         }
@@ -143,7 +143,7 @@ public class Directorio {
                         fileG = selecFileG.getSelectedFile();
                         String fileGname = fileG.getName();
                 
-                        if(fileGname.endsWith(".emst")){
+                        if(fileGname.endsWith(".hoc3")){
                             if(!fileGname.split("[.]")[0].replace(" ","").equals("")){
                                 if(!fileG.exists())
                                     guardarArch(fileG, compF);  
@@ -164,7 +164,7 @@ public class Directorio {
                             }
                         }
                         else{
-                            JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.emst'",
+                            JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.hoc3'",
                                                           "Extensión inválida", 2); 
                             return false;
                         }
@@ -236,7 +236,7 @@ public class Directorio {
             String filename = tFile.getName();
              
 
-            if(filename.endsWith(".emst")){
+            if(filename.endsWith(".hoc3")){
                 if(!filename.split("[.]")[0].replace(" ","").equals("")){
                     if(!tFile.exists())
                         JOptionPane.showMessageDialog(compF, "El archivo que sea desea abrir no existe en el directorio especificado",
@@ -265,7 +265,7 @@ public class Directorio {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.emst'",
+                JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.hoc3'",
                                              "Extensión inválida", 2);  
                 return false;
             }
@@ -336,7 +336,7 @@ public class Directorio {
                 tFile = tSelecFile.getSelectedFile();
                 String filename = tFile.getName();
                 
-                if(filename.endsWith(".emst")){
+                if(filename.endsWith(".hoc3")){
                     if(!filename.split("[.]")[0].replace(" ","").equals("")){
                         if(!tFile.exists()){
                             guardarArch(tFile, compF);  
@@ -367,7 +367,7 @@ public class Directorio {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.emst'",
+                    JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.hoc3'",
                                                   "Extensión inválida", 2); 
                     selecFile = new JFileChooser();
                     file = null;
@@ -389,7 +389,7 @@ public class Directorio {
             tFile = tSelecFile.getSelectedFile();
             String filename = tFile.getName();
                 
-            if(filename.endsWith(".emst")){
+            if(filename.endsWith(".hoc3")){
                 if(!filename.split("[.]")[0].replace(" ","").equals("")){
                     guardarArch(tFile, compF);  
                     file = tFile;
@@ -400,7 +400,7 @@ public class Directorio {
                                                  "Nombre inválido", 2); 
             }
             else
-                JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.emst'",
+                JOptionPane.showMessageDialog(compF, "El archivo debe de tener la extensión '.hoc3'",
                                              "Extensión inválida", 2);  
         }
     }
